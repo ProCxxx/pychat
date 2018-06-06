@@ -1,13 +1,13 @@
 import socket
 import threading
-import sys
+# import sys
 import time
 import random
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 host = socket.gethostname()
-print("Host: "+str(host))
-port = int(sys.argv[1])
+print("Host: " + str(host))
+port = 8080  # int(sys.argv[1])
 s.bind((host, port))
 
 s.listen(10)
@@ -23,15 +23,15 @@ def accConns(s):
         toadd = {'s': c, 'name': name, 'id': round(time.time() * random.randint(1000, 9999))}
         users.append(toadd)
         print('Got connection from', addr)
-        t = threading.Thread(target=unos, args=(c, toadd['id'],name))
+        t = threading.Thread(target=unos, args=(c, toadd['id'], name))
         t.start()
 
 
 def unos(c, index, name):
     while True:
         novo = str(c.recv(1024).decode())
-        if novo=='':
-            novo="User disconnected: "
+        if novo == '':
+            novo = "User disconnected: "
         print(novo)
         broad(novo, index)
         if novo[:19] == "User disconnected: ":
@@ -41,6 +41,7 @@ def unos(c, index, name):
                     del users[i]
                     break
             return
+
 
 def broad(msg, fake):
     for i in range(len(users)):

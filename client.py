@@ -6,9 +6,9 @@ import os
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # host = input("Enter host: ")
-host = socket.gethostname()
+host = str(input("Enter host: "))  # socket.gethostname()
 name = str(input("Enter name: "))
-port = int(sys.argv[1])
+port = int(input("Enter port: "))  # int(sys.argv[1])
 
 s.connect((host, port))
 os.system('clear')
