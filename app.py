@@ -5,7 +5,7 @@ import time
 import random
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-host = '10.131.40.8'  # socket.gethostname()
+host = socket.gethostname()
 print("Host: " + str(host))
 port = 8080  # int(sys.argv[1])
 s.bind((host, port))
